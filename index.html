@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape Room: Proyecto Irune</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="overlay"></div>
+  <main>
+    <section class="nivel visible" id="nivel1">
+      <h1>NIVEL 1: Adivinanza</h1>
+      <p>Vuelo sin alas, lloro sin ojos. ¿Qué soy?</p>
+      <input type="text" id="respuesta1" placeholder="Escribe tu respuesta...">
+      <button onclick="checkNivel1()">Enviar</button>
+      <p class="error" id="error1"></p>
+    </section>
+
+    <section class="nivel" id="nivel2">
+      <h1>NIVEL 2: La Suma Misteriosa</h1>
+      <p>¿Cuánto es 3 + 3?</p>
+      <input type="text" id="respuesta2" placeholder="No es 6...">
+      <button onclick="checkNivel2()">Enviar</button>
+      <p class="error" id="error2"></p>
+    </section>
+
+    <section class="nivel" id="nivel3">
+      <h1>Tu regalo es una mierda</h1>
+      <p>💩💩💩</p>
+    </section>
+
+    <section class="nivel" id="nivel4">
+      <h1>NIVEL 4: Las Matemáticas de Aimar</h1>
+      <p>¿Cuánto es ⊚ ÷ ⚪?</p>
+      <input type="text" id="respuesta4" placeholder="¿Qué lógica es esta?">
+      <button onclick="checkNivel4()">Enviar</button>
+      <p class="error" id="error4"></p>
+    </section>
+
+    <section class="nivel" id="nivel5">
+      <h1>NIVEL 5: Wordle Final</h1>
+      <p>Adivina la palabra secreta (4 letras)</p>
+      <input type="text" id="respuesta5" maxlength="4" placeholder="4 letras">
+      <button onclick="checkNivel5()">Enviar</button>
+      <p class="error" id="error5"></p>
+    </section>
+
+    <section class="nivel" id="final">
+      <h1>🎉 ZORIONAK, IRUNE 🎉</h1>
+      <p>¡Has completado todos los desafíos con éxito!</p>
+      <p>🎁 Tu regalo es una cena para <strong>Orixandro</strong> e <strong>Irune</strong> en el <strong>UDON de Bilbao</strong>. 🍜🥢</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
