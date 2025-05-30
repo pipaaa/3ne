@@ -1,102 +1,110 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  background: url('https://source.unsplash.com/1920x1080/?japanese,city,night') no-repeat center center fixed;
+  margin: 0;
+  font-family: 'Rubik', sans-serif;
+  background: url('https://source.unsplash.com/1600x900/?japan,night') no-repeat center center fixed;
   background-size: cover;
-  height: 100vh;
+  backdrop-filter: blur(8px);
   overflow: hidden;
-}
-
-#overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
-  z-index: 0;
-}
-
-main {
-  position: relative;
-  z-index: 1;
+  height: 100vh;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  padding: 2rem;
 }
 
 .nivel {
   display: none;
-  background: rgba(20, 20, 20, 0.85);
-  padding: 2.5rem;
-  border-radius: 1.5rem;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
   text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 3rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   animation: fadeIn 1s ease-in-out;
 }
 
-.nivel.visible {
+.visible {
   display: block;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-p {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-}
-
-input[type=\"text\"] {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
+input[type="text"] {
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
   border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  background-color: #fff;
-  color: #000;
+  width: 80%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease-in-out;
 }
 
 button {
-  padding: 0.75rem 1.5rem;
-  background-color: #ff4b5c;
+  padding: 0.7rem 2rem;
   border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  color: #fff;
+  border-radius: 1rem;
+  background-color: #ff3c6f;
+  color: white;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px #ff3c6f;
+  transition: transform 0.2s ease-in-out;
 }
 
 button:hover {
-  background-color: #ff2c3c;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff3c6f;
 }
 
-.error {
-  color: #ffaaaa;
-  font-style: italic;
-  font-size: 0.9rem;
+.mierdas {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.mierda.gigante {
+  font-size: 5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.mierda.gigante:hover {
+  transform: scale(1.3) rotate(10deg);
+}
+
+.glitch-text {
+  font-size: 2.5rem;
+  position: relative;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+.fade-in {
+  animation: fadeInText 2s ease forwards;
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rainbow-text {
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.2rem;
+  animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
