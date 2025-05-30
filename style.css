@@ -108,3 +108,104 @@ button:hover {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
+@keyframes glitch-anim {
+  0% {
+    clip: rect(20px, 9999px, 80px, 0);
+    transform: translate(0);
+  }
+  20% {
+    clip: rect(85px, 9999px, 140px, 0);
+    transform: translate(-5px, 5px) skew(0.5deg);
+  }
+  40% {
+    clip: rect(50px, 9999px, 90px, 0);
+    transform: translate(5px, -5px) skew(-0.5deg);
+  }
+  60% {
+    clip: rect(30px, 9999px, 70px, 0);
+    transform: translate(-3px, 3px) skew(1deg);
+  }
+  80% {
+    clip: rect(75px, 9999px, 120px, 0);
+    transform: translate(3px, -3px) skew(-1deg);
+  }
+  100% {
+    clip: rect(20px, 9999px, 80px, 0);
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-flash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.glitch-screen {
+  animation: glitch-flash 0.1s infinite alternate;
+  overflow: hidden;
+  position: relative;
+}
+
+.glitch-screen::before,
+.glitch-screen::after {
+  content: attr(data-text);
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: inherit;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: glitch-anim 1s infinite;
+  z-index: 9999;
+}
+
+.glitch-screen::before {
+  left: 2px;
+  text-shadow: -2px 0 red;
+}
+
+.glitch-screen::after {
+  left: -2px;
+  text-shadow: -2px 0 cyan;
+}
+
+/* Vibración fuerte para toda la pantalla */
+.glitch-screen {
+  animation: glitch-flash 0.1s infinite alternate;
+  filter: contrast(200%) brightness(120%);
+  animation-timing-function: cubic-bezier(.25,.46,.45,.94);
+  animation-duration: 0.15s;
+  animation-name: glitch-flash, glitch-anim;
+  animation-iteration-count: infinite;
+  transform-origin: center;
+  animation-delay: 0s;
+  will-change: transform;
+}
+
+/* Agrega líneas de interferencia */
+.glitch-lines {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 10000;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.05) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: glitch-flash 0.2s infinite alternate;
+}
+
+/* Escala y rotación rápidas para ese efecto “bañado” */
+.glitch-screen.scaled {
+  animation: glitch-flash 0.05s infinite alternate, glitch-anim 0.5s infinite;
+  transform: scale(1.03) rotate(0.5deg);
+}
+
