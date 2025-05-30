@@ -3,7 +3,14 @@ let currentLevel = 1;
 function goToNextLevel() {
   document.getElementById(`nivel${currentLevel}`).classList.remove('visible');
   currentLevel++;
-  document.getElementById(`nivel${currentLevel}`).classList.add('visible');
+  const next = document.getElementById(`nivel${currentLevel}`);
+  next.classList.add('visible');
+  next.classList.add('slide-in');
+  setTimeout(() => next.classList.remove('slide-in'), 1000);
+  
+  if (currentLevel === 6) {
+    triggerFinalAnimation();
+  }
 }
 
 function checkNivel1() {
@@ -34,7 +41,13 @@ function checkNivel2() {
 }
 
 const mierdas = document.querySelectorAll('.mierda');
-mierdas.forEach(m => m.addEventListener('click', () => goToNextLevel()));
+mierdas.forEach(m => m.addEventListener('click', () => {
+  document.body.classList.add('glitch-screen');
+  setTimeout(() => {
+    document.body.classList.remove('glitch-screen');
+    goToNextLevel();
+  }, 1500);
+}));
 
 let intentosNivel4 = 0;
 function checkNivel4() {
@@ -64,11 +77,11 @@ function checkNivel5() {
   let resultado = "";
   for (let i = 0; i < 4; i++) {
     if (r[i] === palabraWordle[i]) {
-      resultado += `<span style='color: lime;'>${r[i]}</span>`;
+      resultado += `<span class='wordle letra-bien'>${r[i]}</span>`;
     } else if (palabraWordle.includes(r[i])) {
-      resultado += `<span style='color: orange;'>${r[i]}</span>`;
+      resultado += `<span class='wordle letra-regular'>${r[i]}</span>`;
     } else {
-      resultado += `<span style='color: gray;'>${r[i]}</span>`;
+      resultado += `<span class='wordle letra-mal'>${r[i]}</span>`;
     }
   }
   document.getElementById("resultadoWordle").innerHTML += `<p>${resultado}</p>`;
@@ -79,4 +92,17 @@ function checkNivel5() {
     document.getElementById("error5").innerText = "Agotaste tus intentos. ¡Pero bueno, se ve que lo intentaste!";
     setTimeout(() => goToNextLevel(), 3000);
   }
+}
+
+function triggerFinalAnimation() {
+  const final = document.getElementById("final");
+  final.classList.add("epic-win");
+  final.innerHTML += `
+    <div class="explosion">🎆🎇✨💥</div>
+    <p class="mega-anuncio">🎁 ¡CENA PREMIUM EN UDON! 🎁</p>
+  `;
+  setTimeout(() => {
+    document.querySelector('.explosion').classList.add('show');
+    document.querySelector('.mega-anuncio').classList.add('pulse');
+  }, 500);
 }
