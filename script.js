@@ -1,93 +1,82 @@
 let currentLevel = 1;
-let intentos2 = 0;
-let intentos4 = 0;
-let intentos5 = 0;
 
-function showLevel(level) {
-  document.querySelectorAll('.nivel').forEach(n => n.classList.remove('visible'));
-  const nivel = document.getElementById('nivel' + level);
-  if (nivel) nivel.classList.add('visible');
-  currentLevel = level;
+function goToNextLevel() {
+  document.getElementById(`nivel${currentLevel}`).classList.remove('visible');
+  currentLevel++;
+  document.getElementById(`nivel${currentLevel}`).classList.add('visible');
 }
 
 function checkNivel1() {
-  const res = document.getElementById("respuesta1").value.toLowerCase();
-  if (res.includes("nube") || res.includes("lluvia")) {
-    showLevel(2);
+  const r = document.getElementById("respuesta1").value.toLowerCase();
+  if (r.includes("nube") || r.includes("lluvia")) {
+    goToNextLevel();
   } else {
-    document.getElementById("error1").textContent = "Pista: Se encuentra en el cielo, ¡vuelve a intentarlo!";
+    document.getElementById("error1").innerText = "Inténtalo de nuevo. Pista: está en el cielo.";
   }
 }
+
+let intentosNivel2 = 0;
+const pistasNivel2 = [
+  "No es un número.",
+  "Es una expresión irreverente.",
+  "Tiene que ver con un sentimiento muy fuerte...", 
+  "¿A quién odiamos en las matemáticas...?"
+];
 
 function checkNivel2() {
-  const res = document.getElementById("respuesta2").value.toLowerCase();
-  intentos2++;
-  if (res === "fuck amagoia") {
-    showLevel(3);
-    setupNivel3();
+  const r = document.getElementById("respuesta2").value.toLowerCase();
+  if (r === "fuck amagoia") {
+    goToNextLevel();
   } else {
-    const pistas = [
-      "Pista 1: No es un número.",
-      "Pista 2: Es una frase en inglés.",
-      "Pista 3: Empieza por F y es grosera.",
-      "Pista 4: La respuesta es 'fuck amagoia'."
-    ];
-    document.getElementById("error2").textContent = pistas[Math.min(intentos2 - 1, pistas.length - 1)];
+    document.getElementById("error2").innerText = pistasNivel2[intentosNivel2] || "Prueba otra vez...";
+    intentosNivel2++;
   }
 }
 
-function setupNivel3() {
-  const nivel3 = document.getElementById("nivel3");
-  if (!document.getElementById("glitch-mierdas")) {
-    const div = document.createElement("div");
-    div.id = "glitch-mierdas";
-    div.innerHTML = `
-      <span class="mierda">💩</span>
-      <span class="mierda">💩</span>
-      <span class="mierda">💩</span>
-    `;
-    nivel3.appendChild(div);
-    document.querySelectorAll(".mierda").forEach(m => {
-      m.style.cursor = "pointer";
-      m.addEventListener("click", glitchAndContinue);
-    });
-  }
-}
+const mierdas = document.querySelectorAll('.mierda');
+mierdas.forEach(m => m.addEventListener('click', () => goToNextLevel()));
 
-function glitchAndContinue() {
-  document.body.style.animation = 'glitch 0.5s ease-in-out';
-  setTimeout(() => {
-    document.body.style.animation = '';
-    showLevel(4);
-  }, 700);
-}
-
+let intentosNivel4 = 0;
 function checkNivel4() {
-  const res = document.getElementById("respuesta4").value.trim();
-  intentos4++;
-  if (intentos4 >= 4) {
-    showLevel(5);
+  intentosNivel4++;
+  if (intentosNivel4 >= 5) {
+    goToNextLevel();
   } else {
-    document.getElementById("error4").textContent = "Hmm... parece que estás cerca, ¿o no?";
+    const mensajes = [
+      "Muy lejos...",
+      "Lejos...",
+      "Algo más cerca...",
+      "Casi...",
+    ];
+    document.getElementById("error4").innerText = mensajes[intentosNivel4 - 1] || "Mmm...";
   }
 }
+
+const palabraWordle = "udon";
+let intentosWordle = 0;
 
 function checkNivel5() {
-  const res = document.getElementById("respuesta5").value.toUpperCase();
-  intentos5++;
-  if (res === "UDON") {
-    showLevel("final");
-  } else {
-    if (intentos5 >= 5) {
-      document.getElementById("error5").textContent = "Era UDON... pero como eres especial, ¡te dejo pasar!";
-      setTimeout(() => showLevel("final"), 2000);
+  const r = document.getElementById("respuesta5").value.toLowerCase();
+  if (r.length !== 4) {
+    document.getElementById("error5").innerText = "Tiene que ser una palabra de 4 letras.";
+    return;
+  }
+  let resultado = "";
+  for (let i = 0; i < 4; i++) {
+    if (r[i] === palabraWordle[i]) {
+      resultado += `<span style='color: lime;'>${r[i]}</span>`;
+    } else if (palabraWordle.includes(r[i])) {
+      resultado += `<span style='color: orange;'>${r[i]}</span>`;
     } else {
-      document.getElementById("error5").textContent = `Nope. Te quedan ${5 - intentos5} intentos.`;
+      resultado += `<span style='color: gray;'>${r[i]}</span>`;
     }
   }
+  document.getElementById("resultadoWordle").innerHTML += `<p>${resultado}</p>`;
+  intentosWordle++;
+  if (r === palabraWordle) {
+    goToNextLevel();
+  } else if (intentosWordle >= 5) {
+    document.getElementById("error5").innerText = "Agotaste tus intentos. ¡Pero bueno, se ve que lo intentaste!";
+    setTimeout(() => goToNextLevel(), 3000);
+  }
 }
-
-// Inicializar primer nivel al cargar
-window.onload = () => {
-  showLevel(1);
-};
