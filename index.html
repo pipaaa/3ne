@@ -1,57 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Escape Room: Proyecto Irune</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escape Room - Cumple Irune</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="overlay"></div>
-  <main>
-    <section class="nivel visible" id="nivel1">
-      <h1>NIVEL 1: Adivinanza</h1>
-      <p>Vuelo sin alas, lloro sin ojos. ¿Qué soy?</p>
-      <input type="text" id="respuesta1" placeholder="Escribe tu respuesta...">
-      <button onclick="checkNivel1()">Enviar</button>
-      <p class="error" id="error1"></p>
-    </section>
+  <div id="nivel1" class="nivel visible">
+    <h2>NIVEL 1 - Adivinanza</h2>
+    <p class="fade-in">Vuelo sin alas, lloro sin ojos. ¿Qué soy?</p>
+    <input type="text" id="respuesta1" />
+    <button onclick="checkNivel1()">Enviar</button>
+    <p id="error1"></p>
+  </div>
 
-    <section class="nivel" id="nivel2">
-      <h1>NIVEL 2: La Suma Misteriosa</h1>
-      <p>¿Cuánto es 3 + 3?</p>
-      <input type="text" id="respuesta2" placeholder="No es 6...">
-      <button onclick="checkNivel2()">Enviar</button>
-      <p class="error" id="error2"></p>
-    </section>
+  <div id="nivel2" class="nivel">
+    <h2>NIVEL 2 - La suma misteriosa</h2>
+    <p class="fade-in">¿Cuánto es 3 + 3?</p>
+    <input type="text" id="respuesta2" />
+    <button onclick="checkNivel2()">Enviar</button>
+    <p id="error2"></p>
+  </div>
 
-    <section class="nivel" id="nivel3">
-      <h1>Tu regalo es una mierda</h1>
-      <p>💩💩💩</p>
-    </section>
+  <div id="nivel3" class="nivel">
+    <h2 class="glitch-text">Tu regalo es una mierda</h2>
+    <div class="mierdas">
+      <span class="mierda gigante">💩</span>
+      <span class="mierda gigante">💩</span>
+      <span class="mierda gigante">💩</span>
+    </div>
+  </div>
 
-    <section class="nivel" id="nivel4">
-      <h1>NIVEL 4: Las Matemáticas de Aimar</h1>
-      <p>¿Cuánto es ⊚ ÷ ⚪?</p>
-      <input type="text" id="respuesta4" placeholder="¿Qué lógica es esta?">
-      <button onclick="checkNivel4()">Enviar</button>
-      <p class="error" id="error4"></p>
-    </section>
+  <div id="nivel4" class="nivel">
+    <h2>NIVEL 4 - Las matemáticas de Aimar</h2>
+    <p class="fade-in">De verdad, tiene lógica. PIENSA.<br><br>
+      ☂ + ❄ = 🧃<br>
+      🦄 - 🍋 = 🌋<br>
+      🧠 × 🐸 = 💎<br>
+      ¿Qué es 🐶 + 🐱 ?</p>
+    <input type="text" id="respuesta4" />
+    <button onclick="checkNivel4()">Enviar</button>
+    <p id="error4"></p>
+  </div>
 
-    <section class="nivel" id="nivel5">
-      <h1>NIVEL 5: Wordle Final</h1>
-      <p>Adivina la palabra secreta (4 letras)</p>
-      <input type="text" id="respuesta5" maxlength="4" placeholder="4 letras">
-      <button onclick="checkNivel5()">Enviar</button>
-      <p class="error" id="error5"></p>
-    </section>
+  <div id="nivel5" class="nivel">
+    <h2>NIVEL 5 - Wordle Final</h2>
+    <p class="fade-in">Adivina la palabra de 4 letras</p>
+    <input type="text" id="respuesta5" maxlength="4" />
+    <button onclick="checkNivel5()">Enviar</button>
+    <div id="resultadoWordle"></div>
+    <p id="error5"></p>
+  </div>
 
-    <section class="nivel" id="final">
-      <h1>🎉 ZORIONAK, IRUNE 🎉</h1>
-      <p>¡Has completado todos los desafíos con éxito!</p>
-      <p>🎁 Tu regalo es una cena para <strong>Orixandro</strong> e <strong>Irune</strong> en el <strong>UDON de Bilbao</strong>. 🍜🥢</p>
-    </section>
-  </main>
+  <div id="final" class="nivel">
+    <h2 class="rainbow-text">🎉 ¡Zorionak, Irune! 🎉</h2>
+    <p>Has resuelto todos los retos. Tu regalo es...<br><strong>¡Una cena para Orixandro e Irune en el UDON de Bilbao!</strong> 🍜🥢</p>
+  </div>
 
   <script src="script.js"></script>
 </body>
